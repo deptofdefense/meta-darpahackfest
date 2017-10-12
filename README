@@ -12,22 +12,24 @@ This layer depends on:
   URI: git://git.openembedded.org/bitbake
   branch: master
 
-  URI: git://git.openembedded.org/openembedded-core
-  layers: meta
+  URI: git://git.openembedded.org/meta-openembedded
+  layers: meta, meta-oe, meta-multimedia, meta-networking, meta-python, meta-filesystems
   branch: master
 
-  URI: git://git.yoctoproject.org/xxxx
-  layers: xxxx
+  URI: git://git.yoctoproject.org/poky
+  branch: pyro
+  
+  URI: git://git.yoctoproject.org/meta-raspberrypi
+  branch: master
+  
+  URI: git://git.yoctoproject.org/meta-qt4
+  branch: pyro
+  
+  URI: git://github.com/balister/meta-sdr
   branch: master
 
 
-Patches
-=======
 
-Please submit any patches against the meta-darpahackfest layer to the
-xxxx mailing list (xxxx@zzzz.org) and cc: the maintainer:
-
-Maintainer: XXX YYYYYY <xxx.yyyyyy@zzzzz.com>
 
 
 Table of Contents
@@ -55,10 +57,24 @@ other layers needed. e.g.:
     /path/to/yocto/meta-poky \
     /path/to/yocto/meta-yocto-bsp \
     /path/to/yocto/meta-meta-darpahackfest \
+    /path/to/yocto/meta-sdr \
+    /path/to/yocto/meta-raspberrypi \
+    /path/to/yocto/meta-qt4 \
+    /path/to/yocto/meta-openembedded/meta-networking \
+    /path/to/yocto/meta-openembedded/meta-python \
+    /path/to/yocto/meta-openembedded/meta-oe \
+    /path/to/yocto/meta-openembedded/meta-filesystems \
     "
+
 
 
 II. Misc
 ========
 
---- replace with specific information about the meta-darpahackfest layer ---
+This layer is used for building images for the DARPA Bay Area Hackfest Event.  It is intened to target a RPi3 using 64bit.  Please follow the instructios at with meta-raspberrypi for configuartion to build for the RPi3.  After configuring bblayers and local.conf for your build area build the image using:
+bitbake darapahackfest-dev-image
+This will create a .sdimg which can be copied to a sdcard using bmaptools
+
+see:
+https://wiki.gnuradio.org/index.php/Embedded_Development_with_GNU_Radio
+for more information about using openembedded with GNU Radio
