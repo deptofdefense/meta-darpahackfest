@@ -17,13 +17,13 @@ This layer depends on:
   branch: master
 
   URI: git://git.yoctoproject.org/poky
-  branch: pyro
+  branch: rocko
   
   URI: git://git.yoctoproject.org/meta-raspberrypi
   branch: master
   
   URI: git://git.yoctoproject.org/meta-qt4
-  branch: pyro
+  branch: rocko
   
   URI: git://github.com/balister/meta-sdr
   branch: master
