@@ -1,8 +1,8 @@
 SUMMARY = "A high-level Python efficient arrays of booleans -- C extension"
 HOMEPAGE = "https://github.com/ilanschnell/bitarray"
 SECTION = "devel/python"
-LICENSE = "PSF"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=3ba469353f9f2a244b2075902351e37d"
+LICENSE = "LGPLv3"
+LIC_FILES_CHKSUM = "file://PKG-INFO;md5=5f2b5916a5ba209599b05caf27ce7dc4"
 DEPENDS = "python-future-native python-pyserial"
 SRCNAME = "pymavlink"
 
