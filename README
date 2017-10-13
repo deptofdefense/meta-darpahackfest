@@ -75,6 +75,8 @@ This layer is used for building images for the DARPA Bay Area Hackfest Event.  I
 bitbake darapahackfest-dev-image
 This will create a .sdimg which can be copied to a sdcard using bmaptools
 
+also read yocto_build_steps to see an example of the buildsteps for a hackfest computer
+
 see:
 https://wiki.gnuradio.org/index.php/Embedded_Development_with_GNU_Radio
 for more information about using openembedded with GNU Radio

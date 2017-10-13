@@ -1,0 +1,65 @@
+OE build instructions for hackfest laptops
+
+Install required packages:
+sudo apt-get install gawk wget git-core diffstat unzip texinfo gcc-multilib \
+     build-essential chrpath socat cpio python python3 python3-pip python3-pexpect \
+     xz-utils debianutils iputils-ping libsdl1.2-dev xterm
+sudo apt-get install bmap-tools
+
+if ~/Development does not exist
+mkdir Development
+else just
+cd Development
+mkdir yocto
+cd yocto/
+git clone https://git.yoctoproject.org/git/meta-raspberrypi
+git clone git://git.yoctoproject.org/poky
+git clone git://git.openembedded.org/meta-openembedded
+git clone https://github.com/balister/meta-sdr.git
+git clone https://git.yoctoproject.org/git/meta-qt4
+git clone https://github.com/deptofdefense/meta-darpahackfest.git
+cd poky/
+git checkout rocko
+cd ../meta-qt4/
+git checkout rocko
+cd ../
+source poky/oe-init-build-env rpi-build
+vi conf/bblayers.conf
+
+add the following lines where hackfest02 is chnaged to the user name
+  /home/hackfest02/Development/yocto/meta-sdr \
+  /home/hackfest02/Development/yocto/meta-qt4 \
+  /home/hackfest02/Development/yocto/meta-darpahackfest \
+  /home/hackfest02/Development/yocto/meta-raspberrypi \
+  /home/hackfest02/Development/yocto/meta-openembedded/meta-networking \
+  /home/hackfest02/Development/yocto/meta-openembedded/meta-python \
+  /home/hackfest02/Development/yocto/meta-openembedded/meta-oe \
+  /home/hackfest02/Development/yocto/meta-openembedded/meta-filesystems \
+  /home/hackfest02/Development/yocto/meta-openembedded/meta-multimedia \
+
+vi conf/local.conf
+
+comment out 
+MACHINE ??= "qemux86"
+add the following line
+MACHINE ??= "raspberrypi3-64"
+
+#TEMP FIX for bug in linux-firmware (should be merged soon)
+download patch from 
+https://patchwork.openembedded.org/patch/144800/
+apply with
+cd ~/Development/yocto/poky/meta/recipes-kernel/linux-firmware
+cp ~/Downloads/linux-firmware-make-i.MX-SDMA-split-complete.patch .
+git apply linux-firmware-make-i.MX-SDMA-split-complete.patch
+
+
+bitbake darpahackfest-dev-image -k
+#go eat and get some coffee thsi will take hours
+when down the image should be in 
+~/Development/yocto/rpi-build/tmp/deploy/images/raspberrypi3-64
+make a sdcard using the following commands:
+insert the sdcard
+unmount the sdcard
+sudo bmaptool copy darpahackfest-dev-image-raspberrypi3-64.rpi-sdimg /dev/mmcblk0 --nobmap
+
+
